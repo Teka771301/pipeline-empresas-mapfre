@@ -100,4 +100,110 @@ salvarBtn.addEventListener("click", async () => {
     const doc = await docRef.get();
 
     if (doc.exists && !formulario.dataset.editando) {
-        alert("Já existe uma cotação com esse nú…
+        alert("Já existe uma cotação com esse número.");
+        return;
+    }
+
+    const dados = {
+        territorial: territorial.value,
+        especialista: especialista.value,
+        vigencia: vigencia.value,
+        produto: produto.value,
+        status: status.value
+    };
+
+    await docRef.set(dados);
+    alert("Cotação salva com sucesso!");
+    formulario.reset();
+    formulario.classList.add("hidden");
+    formulario.dataset.editando = "";
+    carregarTabela();
+});
+
+async function carregarTabela(filtro = {}) {
+    tabelaBody.innerHTML = "";
+    let query = db.collection("pipeline_empresas");
+
+    if (filtro.territorial) query = query.where("territorial", "==", filtro.territorial);
+    if (filtro.especialista) query = query.where("especialista", "==", filtro.especialista);
+    if (filtro.produto) query = query.where("produto", "==", filtro.produto);
+    if (filtro.status) query = query.where("status", "==", filtro.status);
+
+    const snap = await query.get();
+    snap.forEach(doc => {
+        const d = doc.data();
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${doc.id}</td>
+            <td>${d.territorial || ""}</td>
+            <td>${d.especialista || ""}</td>
+            <td>${d.vigencia || ""}</td>
+            <td>${d.produto || ""}</td>
+            <td>${d.status || ""}</td>
+            <td>
+                <button onclick="editarCotacao('${doc.id}')">Editar</button>
+                <button onclick="excluirCotacao('${doc.id}')">Excluir</button>
+            </td>
+        `;
+        tabelaBody.appendChild(tr);
+    });
+}
+
+window.editarCotacao = async function (id) {
+    const doc = await db.collection("pipeline_empresas").doc(id).get();
+    if (!doc.exists) return;
+    const d = doc.data();
+    numCotacao.value = id;
+    territorial.value = d.territorial;
+    especialista.value = d.especialista;
+    vigencia.value = d.vigencia;
+    produto.value = d.produto;
+    status.value = d.status;
+    formulario.classList.remove("hidden");
+    formulario.dataset.editando = "true";
+};
+
+window.excluirCotacao = async function (id) {
+    if (confirm("Deseja realmente excluir esta cotação?")) {
+        await db.collection("pipeline_empresas").doc(id).delete();
+        carregarTabela();
+    }
+};
+
+// =================== FILTROS ==========================
+filtroBtn.addEventListener("click", () => {
+    filtros.classList.toggle("hidden");
+    formulario.classList.add("hidden");
+});
+
+aplicarFiltro.addEventListener("click", () => {
+    const filtro = {
+        territorial: document.getElementById("territorialFiltro").value,
+        especialista: document.getElementById("especialistaFiltro").value,
+        vigencia: document.getElementById("vigenciaFiltro").value,
+        produto: document.getElementById("produtoFiltro").value,
+        status: document.getElementById("statusFiltro").value
+    };
+    carregarTabela(filtro);
+});
+
+// =================== EXPORTAÇÃO EXCEL ==========================
+exportarBtn.addEventListener("click", () => {
+    const linhas = [["Nº Cotação", "Territorial", "Especialista", "Início Vigência", "Produto", "Status Comercial"]];
+    document.querySelectorAll("#tabela tbody tr").forEach(tr => {
+        const cols = [...tr.children].slice(0, 6).map(td => td.textContent);
+        linhas.push(cols);
+    });
+
+    const csv = linhas.map(l => l.join(";")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Relatorio_Pipeline_Empresas.csv";
+    a.click();
+});
+
+// =================== AJUDA ==========================
+ajudaBtn.addEventListener("click", () => ajudaPopup.classList.remove("hidden"));
+fecharAjuda.addEventListener("click", () => ajudaPopup.classList.add("hidden"));
