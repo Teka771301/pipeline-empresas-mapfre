@@ -74,7 +74,7 @@ auth.onAuthStateChanged((user) => {
         loginContainer.classList.add("hidden");
         painelContainer.classList.remove("hidden");
         const nome = user.email.split("@")[0].split(".")[0];
-        bemvindo.textContent = Bem-vindo ao PIPELINE EMPRESAS – MAPFRE, ${nome.charAt(0).toUpperCase() + nome.slice(1)}!;
+       bemvindo.textContent = `Bem-vindo ao PIPELINE EMPRESAS – MAPFRE, ${nome.charAt(0).toUpperCase() + nome.slice(1)}!`;
         carregarTabela();
     } else {
         painelContainer.classList.add("hidden");
@@ -207,6 +207,7 @@ exportarBtn.addEventListener("click", () => {
 // =================== AJUDA ==========================
 ajudaBtn.addEventListener("click", () => ajudaPopup.classList.remove("hidden"));
 fecharAjuda.addEventListener("click", () => ajudaPopup.classList.add("hidden"));
+
 
 
 
