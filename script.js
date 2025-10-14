@@ -11,9 +11,9 @@ const firebaseConfig = {
 };
 
 // Inicialização Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 
 // =============== ELEMENTOS DA INTERFACE ==================
 const loginContainer = document.getElementById("login-container");
@@ -207,3 +207,4 @@ exportarBtn.addEventListener("click", () => {
 // =================== AJUDA ==========================
 ajudaBtn.addEventListener("click", () => ajudaPopup.classList.remove("hidden"));
 fecharAjuda.addEventListener("click", () => ajudaPopup.classList.add("hidden"));
+
