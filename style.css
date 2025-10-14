@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #fff;
+}
+
+header {
+    background-color: #b80000;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#logo {
+    height: 50px;
+    margin-right: 15px;
+}
+
+h1 {
+    font-size: 22px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#login-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #b80000;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #8c0000;
+}
+
+.hidden {
+    display: none;
+}
+
+.menu {
+    background: #f8f8f8;
+    padding: 10px 20px;
+    border-bottom: 2px solid #b80000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu h2 {
+    color: #b80000;
+}
+
+.botoes button {
+    margin-left: 10px;
+}
+
+.sair {
+    background-color: #444;
+}
+
+table {
+    width: 95%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #b80000;
+    color: white;
+}
+
+.popup {
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    background: white;
+    border: 2px solid #b80000;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    z-index: 10;
+    text-align: left;
+}

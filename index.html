@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIPELINE EMPRESAS – MAPFRE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="topo">
+        <img src="logo.jpeg" alt="MAPFRE Logo" id="logo">
+        <h1>PIPELINE EMPRESAS – MAPFRE</h1>
+    </header>
+
+    <div id="login-container" class="card">
+        <h2>Acesso ao Sistema</h2>
+        <input type="email" id="email" placeholder="E-mail corporativo (@mapfre.com.br)">
+        <input type="password" id="senha" placeholder="Senha">
+        <button id="loginBtn">Entrar</button>
+        <p id="loginError" class="error"></p>
+    </div>
+
+    <div id="painel-container" class="hidden">
+        <div class="menu">
+            <h2 id="bemvindo"></h2>
+            <div class="botoes">
+                <button id="novaBtn">Nova Cotação</button>
+                <button id="filtroBtn">Filtrar</button>
+                <button id="exportarBtn">Exportar Excel</button>
+                <button id="ajudaBtn">Ajuda</button>
+                <button id="logoutBtn" class="sair">Sair</button>
+            </div>
+        </div>
+
+        <div id="filtros" class="card hidden">
+            <h3>Filtros de Pesquisa</h3>
+            <input id="territorialFiltro" placeholder="Territorial">
+            <input id="especialistaFiltro" placeholder="Especialista">
+            <input id="vigenciaFiltro" placeholder="Início Vigência">
+            <input id="produtoFiltro" placeholder="Produto">
+            <input id="statusFiltro" placeholder="Status Comercial">
+            <button id="aplicarFiltro">Aplicar</button>
+        </div>
+
+        <div id="formulario" class="card hidden">
+            <h3 id="formTitulo">Nova Cotação</h3>
+            <input id="numCotacao" placeholder="Nº Cotação">
+            <input id="territorial" placeholder="Territorial">
+            <input id="especialista" placeholder="Especialista">
+            <input id="vigencia" placeholder="Início Vigência">
+            <input id="produto" placeholder="Produto">
+            <input id="status" placeholder="Status Comercial">
+            <button id="salvarBtn">Salvar</button>
+        </div>
+
+        <table id="tabela">
+            <thead>
+                <tr>
+                    <th>Nº Cotação</th>
+                    <th>Territorial</th>
+                    <th>Especialista</th>
+                    <th>Início Vigência</th>
+                    <th>Produto</th>
+                    <th>Status Comercial</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="ajudaPopup" class="popup hidden">
+        <h3>🧭 Ajuda – PIPELINE EMPRESAS</h3>
+        <p>• <b>Incluir Cotação:</b> clique em “Nova Cotação” e preencha os campos.<br>
+        • <b>Editar / Excluir:</b> use os botões ao lado de cada cotação.<br>
+        • <b>Filtros:</b> busque por Territorial, Especialista, Produto, etc.<br>
+        • <b>Exportar Excel:</b> salva apenas o que estiver filtrado.<br>
+        • <b>Login:</b> apenas e-mails @mapfre.com.br têm acesso.</p>
+        <button id="fecharAjuda">Fechar</button>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
